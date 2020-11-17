@@ -4,9 +4,9 @@
         <!-- Webpage Title -->
         <title>giftpick | 관리자</title>
 
-<meta property="og:title" content="선물 골라드림 | giftpick" />
-<meta property="og:description" content="선물을 골라드려요" />
-<meta property="og:image" content="{{ url_for('static', filename='gift.png') }}" />
+        <meta property="og:title" content="선물 골라드림 | giftpick"/>
+        <meta property="og:description" content="선물을 골라드려요"/>
+        <meta property="og:image" content="{{ url_for('static', filename='gift.png') }}"/>
 
 
         <!-- Required meta tags -->
@@ -35,7 +35,7 @@
                     data: {},
                     success: function (response) {
                         if (response["result"] == "success") {
-                            let candidates=response["candidates"];
+                            let candidates = response["candidates"];
                             makeCard(candidates)
                         }
                     }
