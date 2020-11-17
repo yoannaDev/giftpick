@@ -18,7 +18,10 @@ def home():
 def write_tag():
     # 클라이언트가 준 tags 가져오기
     tags_receive = request.form.getlist('tags_give[]')
-    db.testgift.insert_one({"tags": tags_receive})
+    title_receive = request.form('title')
+    price_receive = request.form('price')
+    url_receive = request.form('url')
+    db.testgift.insert_one({"title": title_receive, "price": price_receive, "url": url_receive, "tags": tags_receive})
 
     # 성공 여부 & 성공 메시지 반환
     return jsonify({'result': 'success', 'msg': '태그 저장 성공'})

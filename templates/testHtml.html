@@ -8,7 +8,6 @@
         <meta property="og:description" content="선물을 골라드려요"/>
         <meta property="og:image" content="{{ url_for('static', filename='gift.png') }}"/>
 
-
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,9 +27,10 @@
         <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
 
         <script type="text/javascript">
-            $(document).ready(function(){
+            $(document).ready(function () {
                 show_candidates();
             })
+
             function show_candidates() {
                 $.ajax({
                     type: "GET",
@@ -47,13 +47,13 @@
             }
 
             //수정하기
-            function makeCard(candidates) {
+            function makeCard(candidate) {
                 let num_candidates = 0; // 후보 몇명인지 세기
                 let tempHtml = `<div class="input-box">
                 <div class="gift-info">
-                    <p>${candidates["price"]}</p>
-                    <p>${candidates["title"]}</p>
-                    <p>${candidates["url"]}</p>
+                    <p>${candidate["price"]}</p>
+                    <p>${candidate["title"]}</p>
+                    <p>${candidate["url"]}</p>
                 </div>
                 <div class="check-box">
                     <div>
@@ -104,16 +104,19 @@
                         <input type="checkbox" name="season" value="winter"/>겨울
                         <input type="checkbox" name="season" value="no-season"/>선택안함
                     </div>
-                    <button onclick="insert_to_db()">제출</button>
+                    <button onclick="insert_to_db(${candidate})">제출</button>
                     <button onclick="delete_data()">삭제</button>
                     </div>
                 </div>`;
                 $("#div-input").append(tempHtml);
             }
 
-            function insert_to_db() {
+            function insert_to_db(candidate) {
                 let tags = new Array();
                 let index = 0;
+                let url = candidate["url"];
+                let title = candidate["title"];
+                let price = candidate["price"];
                 for (let i = 0; i < document.getElementsByName("age").length; i++) {
                     if (document.getElementsByName("age")[i].checked == true) {
                         tags[index] = document.getElementsByName("age")[i].value;
@@ -154,7 +157,7 @@
                 $.ajax({
                     type: "POST",
                     url: "/tag",
-                    data: {tags_give: tags},
+                    data: {tags_give: tags, url_give: url, title_give: title, price_give: price},
                     success: function (response) {
                         if (response["result"] == "success") {
                             alert(tags);
