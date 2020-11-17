@@ -25,13 +25,6 @@ def write_tag():
 
 
 @app.route('/tag', methods=['GET'])
-def read_reviews():
-    # 1. DB에서 리뷰 정보 모두 가져오기
-    reviews = list(db.test.find({}, {'_id': 0}))
-    # 2. 성공 여부 & 리뷰 목록 반환하기
-    return jsonify({'result': 'success', 'reviews': reviews})
-
-@app.route('/tag', methods=['GET'])
 def read_candidates():
     # 1. DB에서 크롤링 정보 모두 가져오기
     candidates = list(db.test.find({}, {'_id': 0}))

@@ -28,6 +28,9 @@
         <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
 
         <script type="text/javascript">
+            $(document).ready(function(){
+                show_candidates();
+            })
             function show_candidates() {
                 $.ajax({
                     type: "GET",
@@ -36,7 +39,8 @@
                     success: function (response) {
                         if (response["result"] == "success") {
                             let candidates = response["candidates"];
-                            makeCard(candidates)
+                            for (let i = 0; i < candidates.length; i++)
+                                makeCard(candidates[i])
                         }
                     }
                 })
@@ -45,12 +49,66 @@
             //수정하기
             function makeCard(candidates) {
                 let num_candidates = 0; // 후보 몇명인지 세기
-                let tempHtml = `<tr>
-                        <td>${title}</td>
-                        <td>${author}</td>
-                        <td>${review}</td>
-                    </tr>`;
-                $("#reviews-box").append(tempHtml);
+                let tempHtml = `<div class="input-box">
+                <div class="gift-info">
+                    <p>${candidates["price"]}</p>
+                    <p>${candidates["title"]}</p>
+                    <p>${candidates["url"]}</p>
+                </div>
+                <div class="check-box">
+                    <div>
+                        <input type="checkbox" name="age" value="10"/>10대
+                        <input type="checkbox" name="age" value="20"/>20대
+                        <input type="checkbox" name="age" value="30"/>30대
+                        <input type="checkbox" name="age" value="40"/>40대
+                        <input type="checkbox" name="age" value="50"/>50대
+                        <input type="checkbox" name="age" value="60"/>60대
+                    </div>
+                    <div>
+                        <input type="checkbox" name="gender" value="female"/>여자
+                        <input type="checkbox" name="gender" value="male"/>남자
+                        <input type="checkbox" name="gender" value="no-gender"/>선택안함
+                    </div>
+                    <div>
+                        <input type="checkbox" name="budget" value="0"/>1만원 이하
+                        <input type="checkbox" name="budget" value="1"/>1만원~3만원
+                        <input type="checkbox" name="budget" value="3"/>3만원~5만원
+                        <input type="checkbox" name="budget" value="5"/>5만원~10만원
+                        <input type="checkbox" name="budget" value="10"/>10만원 이상
+                        <input type="checkbox" name="budget" value="100"/>100만원 이상
+                        <input type="checkbox" name="budget" value="etc-budget"/>기타
+                    </div>
+                    <div>
+                        <input type="checkbox" name="mood" value="moving"/>감동
+                        <input type="checkbox" name="mood" value="practice"/>실용
+                        <input type="checkbox" name="mood" value="memory"/>추억
+                        <input type="checkbox" name="mood" value="healing"/>힐링
+                        <input type="checkbox" name="mood" value="health"/>건강
+                        <input type="checkbox" name="mood" value="small-happy"/>소소한행복
+                        <input type="checkbox" name="mood" value="etc-mood"/>기타
+                    </div>
+                    <div>
+                        <input type="checkbox" name="tpo" value="fighting"/>시험 응원
+                        <input type="checkbox" name="tpo" value="anniversary"/>기념일
+                        <input type="checkbox" name="tpo" value="cheer-up"/>위로
+                        <input type="checkbox" name="tpo" value=""/>감사표시
+                        <input type="checkbox" name="tpo" value="birthday"/>생일
+                        <input type="checkbox" name="tpo" value="wedding"/>결혼
+                        <input type="checkbox" name="tpo" value="xmas"/>크리스마스
+                        <input type="checkbox" name="tpo" value="etc-tpo"/>기타
+                    </div>
+                    <div>
+                        <input type="checkbox" name="season" value="spring"/>봄
+                        <input type="checkbox" name="season" value="summer"/>여름
+                        <input type="checkbox" name="season" value="fall"/>가을
+                        <input type="checkbox" name="season" value="winter"/>겨울
+                        <input type="checkbox" name="season" value="no-season"/>선택안함
+                    </div>
+                    <button onclick="insert_to_db()">제출</button>
+                    <button onclick="delete_data()">삭제</button>
+                    </div>
+                </div>`;
+                $("#div-input").append(tempHtml);
             }
 
             function insert_to_db() {
@@ -125,110 +183,7 @@
 
     <body>
         <h1>관리자 페이지</h1>
-        <div class="input-box">
-            <div>
-                <input type="checkbox" name="age" value="10"/>10대
-                <input type="checkbox" name="age" value="20"/>20대
-                <input type="checkbox" name="age" value="30"/>30대
-                <input type="checkbox" name="age" value="40"/>40대
-                <input type="checkbox" name="age" value="50"/>50대
-                <input type="checkbox" name="age" value="60"/>60대
-            </div>
-            <div>
-                <input type="checkbox" name="gender" value="female"/>여자
-                <input type="checkbox" name="gender" value="male"/>남자
-                <input type="checkbox" name="gender" value="no-gender"/>선택안함
-            </div>
-            <div>
-                <input type="checkbox" name="budget" value="0"/>1만원 이하
-                <input type="checkbox" name="budget" value="1"/>1만원~3만원
-                <input type="checkbox" name="budget" value="3"/>3만원~5만원
-                <input type="checkbox" name="budget" value="5"/>5만원~10만원
-                <input type="checkbox" name="budget" value="10"/>10만원 이상
-                <input type="checkbox" name="budget" value="100"/>100만원 이상
-                <input type="checkbox" name="budget" value="etc-budget"/>기타
-            </div>
-            <div>
-                <input type="checkbox" name="mood" value="moving"/>감동
-                <input type="checkbox" name="mood" value="practice"/>실용
-                <input type="checkbox" name="mood" value="memory"/>추억
-                <input type="checkbox" name="mood" value="healing"/>힐링
-                <input type="checkbox" name="mood" value="health"/>건강
-                <input type="checkbox" name="mood" value="small-happy"/>소소한행복
-                <input type="checkbox" name="mood" value="etc-mood"/>기타
-            </div>
-            <div>
-                <input type="checkbox" name="tpo" value="fighting"/>시험 응원
-                <input type="checkbox" name="tpo" value="anniversary"/>기념일
-                <input type="checkbox" name="tpo" value="cheer-up"/>위로
-                <input type="checkbox" name="tpo" value=""/>감사표시
-                <input type="checkbox" name="tpo" value="birthday"/>생일
-                <input type="checkbox" name="tpo" value="wedding"/>결혼
-                <input type="checkbox" name="tpo" value="xmas"/>크리스마스
-                <input type="checkbox" name="tpo" value="etc-tpo"/>기타
-            </div>
-            <div>
-                <input type="checkbox" name="season" value="spring"/>봄
-                <input type="checkbox" name="season" value="summer"/>여름
-                <input type="checkbox" name="season" value="fall"/>가을
-                <input type="checkbox" name="season" value="winter"/>겨울
-                <input type="checkbox" name="season" value="no-season"/>선택안함
-            </div>
-            <button onclick="insert_to_db()">제출</button>
-            <button onclick="delete_data()">삭제</button>
-        </div>
-        <div class="input-box">
-            <div>
-                <input type="checkbox" name="age" value="10"/>10대
-                <input type="checkbox" name="age" value="20"/>20대
-                <input type="checkbox" name="age" value="30"/>30대
-                <input type="checkbox" name="age" value="40"/>40대
-                <input type="checkbox" name="age" value="50"/>50대
-                <input type="checkbox" name="age" value="60"/>60대
-            </div>
-            <div>
-                <input type="checkbox" name="gender" value="female"/>여자
-                <input type="checkbox" name="gender" value="male"/>남자
-                <input type="checkbox" name="gender" value="no-gender"/>선택안함
-            </div>
-            <div>
-                <input type="checkbox" name="budget" value="0"/>1만원 이하
-                <input type="checkbox" name="budget" value="1"/>1만원~3만원
-                <input type="checkbox" name="budget" value="3"/>3만원~5만원
-                <input type="checkbox" name="budget" value="5"/>5만원~10만원
-                <input type="checkbox" name="budget" value="10"/>10만원 이상
-                <input type="checkbox" name="budget" value="100"/>100만원 이상
-                <input type="checkbox" name="budget" value="etc-budget"/>기타
-            </div>
-            <div>
-                <input type="checkbox" name="mood" value="moving"/>감동
-                <input type="checkbox" name="mood" value="practice"/>실용
-                <input type="checkbox" name="mood" value="memory"/>추억
-                <input type="checkbox" name="mood" value="healing"/>힐링
-                <input type="checkbox" name="mood" value="health"/>건강
-                <input type="checkbox" name="mood" value="small-happy"/>소소한행복
-                <input type="checkbox" name="mood" value="etc-mood"/>기타
-            </div>
-            <div>
-                <input type="checkbox" name="tpo" value="fighting"/>시험 응원
-                <input type="checkbox" name="tpo" value="anniversary"/>기념일
-                <input type="checkbox" name="tpo" value="cheer-up"/>위로
-                <input type="checkbox" name="tpo" value=""/>감사표시
-                <input type="checkbox" name="tpo" value="birthday"/>생일
-                <input type="checkbox" name="tpo" value="wedding"/>결혼
-                <input type="checkbox" name="tpo" value="xmas"/>크리스마스
-                <input type="checkbox" name="tpo" value="etc-tpo"/>기타
-            </div>
-            <div>
-                <input type="checkbox" name="season" value="spring"/>봄
-                <input type="checkbox" name="season" value="summer"/>여름
-                <input type="checkbox" name="season" value="fall"/>가을
-                <input type="checkbox" name="season" value="winter"/>겨울
-                <input type="checkbox" name="season" value="no-season"/>선택안함
-            </div>
-            <button onclick="insert_to_db()">제출</button>
-            <button onclick="delete_data()">삭제</button>
-        </div>
+        <div id="div-input"></div>
     </body>
 
 </html>
