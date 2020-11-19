@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <!-- Webpage Title -->
+        <title>giftpick | 관리자</title>
+
+        <meta property="og:title" content="선물 골라드림 | giftpick"/>
+        <meta property="og:description" content="선물을 골라드려요"/>
+        <meta property="og:image" content="{{ url_for('static', filename='gift.png') }}"/>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+
+        <!-- 구글폰트 -->
+        <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                show_candidates();
+            })
+
+            function show_candidates() {
+                $.ajax({
+                    type: "GET",
+                    url: "/tag",
+                    data: {},
+                    success: function (response) {
+                        if (response["result"] == "success") {
+                            let candidates = response["candidates"];
+                            for (let i = 0; i < candidates.length; i++)
+                                makeCard(candidates[i])
+                        }
+                    }
+                })
+            }
+
+            //수정하기
+            function makeCard(candidate) {
+                let tempHtml = `<div class="input-box">
+
+                <div class="gift-info">
+                    <p>${candidate["price"]}</p>
+                    <p>${candidate["title"]}</p>
+                    <p>${candidate["url"]}</p>
+                </div>
+                <div class="check-box">
+                    <div>
+                        <input type="checkbox" name="age" value="10"/>10대
+                        <input type="checkbox" name="age" value="20"/>20대
+                        <input type="checkbox" name="age" value="30"/>30대
+                        <input type="checkbox" name="age" value="40"/>40대
+                        <input type="checkbox" name="age" value="50"/>50대
+                        <input type="checkbox" name="age" value="60"/>60대이상
+                    </div>
+                    <div>
+                        <input type="checkbox" name="gender" value="female"/>여자
+                        <input type="checkbox" name="gender" value="male"/>남자
+                    </div>
+                    <div>
+                        <input type="checkbox" name="budget" value="0"/>1만원 이하
+                        <input type="checkbox" name="budget" value="1"/>1~3만원
+                        <input type="checkbox" name="budget" value="3"/>3~5만원
+                        <input type="checkbox" name="budget" value="3"/>5~10만원
+                        <input type="checkbox" name="budget" value="10"/>10만원 이상
+                        <input type="checkbox" name="budget" value="50"/>50만원 이상
+                    </div>
+                    <div>
+                        <input type="checkbox" name="tpo" value="birthday"/>생일
+                        <input type="checkbox" name="tpo" value="xmas"/>크리스마스
+                        <input type="checkbox" name="tpo" value="fighting"/>시험 응원
+                        <input type="checkbox" name="tpo" value="anniversary"/>결혼(커플)기념일
+                        <input type="checkbox" name="tpo" value=""/>감사표시
+                        <input type="checkbox" name="tpo" value="wedding"/>지인의 결혼선물
+                        <input type="checkbox" name="tpo" value="etc-tpo"/>기타
+                    </div>
+                    <div>
+                        <input type="checkbox" name="season" value="spring"/>봄
+                        <input type="checkbox" name="season" value="summer"/>여름
+                        <input type="checkbox" name="season" value="fall"/>가을
+                        <input type="checkbox" name="season" value="winter"/>겨울
+                        <input type="checkbox" name="season" value="no-season"/>선택안함
+                    </div>
+                    <div>
+                        <input type="checkbox" name="mood" value="moving"/>감동
+                        <input type="checkbox" name="mood" value="practice"/>실용
+                        <input type="checkbox" name="mood" value="memory"/>추억
+                        <input type="checkbox" name="mood" value="healing"/>힐링
+                        <input type="checkbox" name="mood" value="health"/>건강
+                        <input type="checkbox" name="mood" value="small-happy"/>소소한행복
+                        <input type="checkbox" name="mood" value="etc-mood"/>기타
+                    </div>
+                    <button onclick="insert_to_db(${candidate["price"]},${candidate["title"]},${candidate["url"]})">제출</button>
+                    <button onclick="delete_data()">삭제</button>
+                    </div>
+                </div>`;
+                $("#div-input").append(tempHtml);
+            }
+
+            function insert_to_db(price, title, url) {
+                let tags = new Array();
+                let index = 0;
+                for (let i = 0; i < document.getElementsByName("age").length; i++) {
+                    if (document.getElementsByName("age")[i].checked == true) {
+                        tags[index] = document.getElementsByName("age")[i].value;
+                        index++;
+                    }
+                }
+                for (let i = 0; i < document.getElementsByName("gender").length; i++) {
+                    if (document.getElementsByName("gender")[i].checked == true) {
+                        tags[index] = document.getElementsByName("gender")[i].value;
+                        index++;
+                    }
+                }
+                for (let i = 0; i < document.getElementsByName("budget").length; i++) {
+                    if (document.getElementsByName("budget")[i].checked == true) {
+                        tags[index] = document.getElementsByName("budget")[i].value;
+                        index++;
+                    }
+                }
+                for (let i = 0; i < document.getElementsByName("mood").length; i++) {
+                    if (document.getElementsByName("mood")[i].checked == true) {
+                        tags[index] = document.getElementsByName("mood")[i].value;
+                        index++;
+                    }
+                }
+                for (let i = 0; i < document.getElementsByName("tpo").length; i++) {
+                    if (document.getElementsByName("tpo")[i].checked == true) {
+                        tags[index] = document.getElementsByName("tpo")[i].value;
+                        index++;
+                    }
+                }
+                for (let i = 0; i < document.getElementsByName("season").length; i++) {
+                    if (document.getElementsByName("season")[i].checked == true) {
+                        tags[index] = document.getElementsByName("season")[i].value;
+                        index++;
+                    }
+                }
+                alert(tags);
+                $.ajax({
+                    type: "POST",
+                    url: "/tag",
+                    data: {tags_give: tags, url_give: url, title_give: title, price_give: price},
+                    success: function (response) {
+                        if (response["result"] == "success") {
+                            alert(tags);
+                        }
+                    }
+                })
+            }
+
+            function delete_data() {
+
+            }
+        </script>
+
+        <style type="text/css">
+            * {
+                font-family: "Do Hyeon", sans-serif;
+            }
+
+            .input-box {
+                border: 1px solid;
+                border-color: black;
+                margin: 3px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>관리자 페이지</h1>
+        <div id="div-input"></div>
+    </body>
+
+</html>

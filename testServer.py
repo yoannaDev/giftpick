@@ -11,6 +11,10 @@ db = client.giftpick
 def home():
     return render_template('testHtml.html')
 
+@app.route('/age')
+def age():
+    return render_template('select-age.html')
+
 ## API 역할을 하는 부분
 @app.route('/tag', methods=['POST'])
 def write_tag():
