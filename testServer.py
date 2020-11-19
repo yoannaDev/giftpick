@@ -13,7 +13,7 @@ def home():
     return render_template('testHtml.html')
 
 
-@app.route('/age', methods=['POST'])
+@app.route('/age')
 def age():
     return render_template('select-age.html')
 
