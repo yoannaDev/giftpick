@@ -1,10 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
-    <body>
+        <!-- Webpage Title -->
+        <title>선물 골라드림 | gift pick</title>
 
+        <meta property="og:title" content="선물 골라드림 | giftpick"/>
+        <meta property="og:description" content="선물을 골라드려요"/>
+        <meta property="og:image" content="{{ url_for('static', filename='gift.png') }}"/>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+
+        <!-- 구글폰트 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap" rel="stylesheet">
+
+        <script type="text/javascript">
+
+            function post_mood(mood) {
+                $.ajax({
+                    type: "POST",
+                    url: "/mood",
+                    data: {mood_give: mood},
+                    success: function (response) {
+                        if (response["result"] == "success") {
+                            alert('mood : ' + mood);
+                        }
+                    }
+                })
+            }
+
+        </script>
+
+        <style type="text/css">
+
+            * {
+                font-family: 'Gothic A1', sans-serif;
+                color: white;
+            }
+
+            body {
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .select {
+                background-image: url('https://images.unsplash.com/photo-1503455637927-730bce8583c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');
+                background-size: cover;
+                background-repeat: no-repeat;
+                width: 1280px;
+                height: 573px;
+                margin: 0px auto;
+                border-radius: 0px;
+                padding-top: 80px;
+                text-align: center;
+            }
+
+            .btn {
+                background-color: salmon;
+                border-color: salmon;
+                border-radius: 100px;
+                width: 210px;
+                height: 70px;
+                text-align: center;
+                padding-top: 20px;
+                margin: 5px;
+            }
+
+            .btn-select {
+                margin:
+            }
+
+            h2 {
+                color: black;
+                margin-left: 100px;
+                margin-top: 5px;
+                font-family: 'Nanum Gothic', sans-serif;
+            }
+
+
+            .button-area {
+                width: 500px;
+                margin: 0px auto;
+            }
+
+            .question {
+                margin-bottom: 60px;
+                margin-top: 100px;
+                font-weight: bolder;
+                font-size: 26px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+        </div>
+        <div id="intro">
+            <h2>gift pick</h2>
+            <p></p>
+            <div class="select">
+                <h3 class="display-4 question">
+                    선물에서 주는 사람의 취향도 나타나기 마련이죠.<br>
+                    어떤 단어가 가장 마음에 드세요?
+                </h3>
+                <div class="button-area">
+                    <a class="btn btn-primary btn-lg btn-select" href="/result" role="button" onclick="post_mood('practice')">실용</a>
+                </div>
+            </div>
+        </div>
     </body>
+
 </html>
