@@ -6,38 +6,47 @@ app = Flask(__name__)
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
 db = client.giftpick
 
+
 ## HTML을 주는 부분
 @app.route('/')
 def home():
     return render_template('testHtml.html')
 
+
 @app.route('/age', methods=['POST'])
 def age():
     return render_template('select-age.html')
+
 
 @app.route('/budget', methods=['POST'])
 def budget():
     return render_template('select-budget.html')
 
+
 @app.route('/gender', methods=['POST'])
 def gender():
     return render_template('select-gender.html')
+
 
 @app.route('/mood', methods=['POST'])
 def mood():
     return render_template('select-mood.html')
 
+
 @app.route('/season', methods=['POST'])
 def season():
     return render_template('select-season.html')
+
 
 @app.route('/tpo', methods=['POST'])
 def tpo():
     return render_template('select-tpo.html')
 
+
 @app.route('/result', methods=['POST'])
 def result():
     return render_template('result.html')
+
 
 ## API 역할을 하는 부분
 @app.route('/tag', methods=['POST'])
