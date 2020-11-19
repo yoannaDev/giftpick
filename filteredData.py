@@ -1,3 +1,4 @@
+# 선물 db 넣는거 작성하기
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)

@@ -30,41 +30,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap" rel="stylesheet">
 
         <script type="text/javascript">
-            $(document).ready(function () {
-                show_candidates();
-            })
 
-            function show_candidates() {
-                $.ajax({
-                    type: "GET",
-                    url: "/tag",
-                    data: {},
-                    success: function (response) {
-                        if (response["result"] == "success") {
-                            let candidates = response["candidates"];
-                            for (let i = 0; i < candidates.length; i++)
-                                makeCard(candidates[i])
-                        }
-                    }
-                })
-            }
-
-            //수정하기
-            function makeCard(candidate) {
-                let tempHtml = ``;
-                $("#div-input").append(tempHtml);
-            }
-
-            function insert_to_db(price, title, url) {
-
-                alert(tags);
+            function post_gender(gender) {
                 $.ajax({
                     type: "POST",
-                    url: "/tag",
-                    data: {tags_give: tags, title_give: title},
+                    url: "/gender",
+                    data: {gender_give: gender},
                     success: function (response) {
                         if (response["result"] == "success") {
-                            alert(tags);
+                            alert('gender : ' + gender);
                         }
                     }
                 })
@@ -85,7 +59,7 @@
             }
 
             .select {
-                background-image: url('핑크배경.jpg');
+                background-image: url('../핑크배경.jpg');
                 background-size: cover;
                 background-repeat: no-repeat;
                 width: 1280px;
@@ -111,8 +85,6 @@
                 margin:
             }
 
-            <!--
-            -->
             h2 {
                 color: black;
                 margin-left: 100px;
@@ -120,15 +92,6 @@
                 font-family: 'Nanum Gothic', sans-serif;
             }
 
-            .tx {
-            }
-
-            .content1 {
-                font-weight: bold;
-                margin: 25px;
-                font-size: 18px;
-                line-height: 27px;
-            }
 
             .button-area {
                 width: 500px;
@@ -152,16 +115,11 @@
             <p></p>
             <div class="select">
                 <h3 class="display-4 question">
-                    선물에서 주는 사람의 취향도 나타나기 마련이죠.<br>
-                    어떤 단어가 가장 마음에 드세요?
+                    받는 분이 여자인가요? 남자인가요?<br>
                 </h3>
                 <div class="button-area">
-                    <a class="btn btn-primary btn-lg btn-select" href="/result" role="button" onclick="">실용</a>
-                    <a class="btn btn-primary btn-lg btn-select" href="/result" role="button" onclick="">힐링</a>
-                    <a class="btn btn-primary btn-lg btn-select" href="/result" role="button" onclick="">추억</a>
-                    <a class="btn btn-primary btn-lg btn-select" href="/result" role="button" onclick="">건강</a>
-                    <a class="btn btn-primary btn-lg btn-select" href="/result" role="button" onclick="">소소한행복</a>
-                    <a class="btn btn-primary btn-lg btn-select" href="/result" role="button" onclick="">감동</a>
+                    <a class="btn btn-primary btn-lg btn-select" href="/budget" role="button" onclick="post_gender('female')">여자</a>
+                    <a class="btn btn-primary btn-lg btn-select" href="/budget" role="button" onclick="post_gender('male')">남자</a>
                 </div>
             </div>
         </div>

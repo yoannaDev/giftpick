@@ -30,41 +30,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap" rel="stylesheet">
 
         <script type="text/javascript">
-            $(document).ready(function () {
-                show_candidates();
-            })
 
-            function show_candidates() {
-                $.ajax({
-                    type: "GET",
-                    url: "/tag",
-                    data: {},
-                    success: function (response) {
-                        if (response["result"] == "success") {
-                            let candidates = response["candidates"];
-                            for (let i = 0; i < candidates.length; i++)
-                                makeCard(candidates[i])
-                        }
-                    }
-                })
-            }
-
-            //수정하기
-            function makeCard(candidate) {
-                let tempHtml = ``;
-                $("#div-input").append(tempHtml);
-            }
-
-            function insert_to_db(price, title, url) {
-
-                alert(tags);
+            function post_season(season) {
                 $.ajax({
                     type: "POST",
-                    url: "/tag",
-                    data: {tags_give: tags, title_give: title},
+                    url: "/season",
+                    data: {season_give: season},
                     success: function (response) {
                         if (response["result"] == "success") {
-                            alert(tags);
+                            alert('season : ' + season);
                         }
                     }
                 })
@@ -85,7 +59,7 @@
             }
 
             .select {
-                background-image: url('핑크배경.jpg');
+                background-image: url('../핑크배경.jpg');
                 background-size: cover;
                 background-repeat: no-repeat;
                 width: 1280px;
@@ -111,23 +85,12 @@
                 margin:
             }
 
-            <!--
-            -->
+
             h2 {
                 color: black;
                 margin-left: 100px;
                 margin-top: 5px;
                 font-family: 'Nanum Gothic', sans-serif;
-            }
-
-            .tx {
-            }
-
-            .content1 {
-                font-weight: bold;
-                margin: 25px;
-                font-size: 18px;
-                line-height: 27px;
             }
 
             .button-area {
@@ -156,10 +119,10 @@
                     날씨에 따라 줄 수 있는 선물도 달라져요.<br>
                 </h3>
                 <div class="button-area">
-                    <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button" onclick="">봄</a>
-                    <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button" onclick="">여름</a>
-                    <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button" onclick="">가을</a>
-                    <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button" onclick="">겨울</a>
+                    <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button" onclick="post_season('spring')">봄</a>
+                    <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button" onclick="post_season('summer')">여름</a>
+                    <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button" onclick="post_season('fall')">가을</a>
+                    <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button" onclick="post_season('winter')">겨울</a>
                 </div>
             </div>
         </div>
