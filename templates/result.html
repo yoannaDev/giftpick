@@ -31,11 +31,11 @@
 
         <script type="text/javascript">
 
-            function post_mood(mood) {
+            function reset_all() {
                 $.ajax({
                     type: "POST",
-                    url: "/mood",
-                    data: {mood_give: mood},
+                    url: "/",
+                    data: {},
                     success: function (response) {
                         if (response["result"] == "success") {
                             alert('mood : ' + mood);
@@ -115,11 +115,10 @@
             <p></p>
             <div class="select">
                 <h3 class="display-4 question">
-                    선물에서 주는 사람의 취향도 나타나기 마련이죠.<br>
-                    어떤 단어가 가장 마음에 드세요?
+                    지금 딱 맞는 선물은?
                 </h3>
                 <div class="button-area">
-                    <a class="btn btn-primary btn-lg btn-select" href="/result" role="button" onclick="post_mood('practice')">실용</a>
+                    <a class="btn btn-primary btn-lg btn-select" href="/" role="button" onclick="reset_all()"></a>
                 </div>
             </div>
         </div>

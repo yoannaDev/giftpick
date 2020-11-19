@@ -11,31 +11,31 @@ db = client.giftpick
 def home():
     return render_template('testHtml.html')
 
-@app.route('/age')
+@app.route('/age', methods=['POST'])
 def age():
     return render_template('select-age.html')
 
-@app.route('/budget')
+@app.route('/budget', methods=['POST'])
 def budget():
     return render_template('select-budget.html')
 
-@app.route('/gender')
+@app.route('/gender', methods=['POST'])
 def gender():
     return render_template('select-gender.html')
 
-@app.route('/mood')
+@app.route('/mood', methods=['POST'])
 def mood():
     return render_template('select-mood.html')
 
-@app.route('/season')
+@app.route('/season', methods=['POST'])
 def season():
     return render_template('select-season.html')
 
-@app.route('/tpo')
+@app.route('/tpo', methods=['POST'])
 def tpo():
     return render_template('select-tpo.html')
 
-@app.route('/result')
+@app.route('/result', methods=['POST'])
 def result():
     return render_template('result.html')
 
