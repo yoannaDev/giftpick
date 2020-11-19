@@ -15,6 +15,30 @@ def home():
 def age():
     return render_template('select-age.html')
 
+@app.route('/budget')
+def budget():
+    return render_template('select-budget.html')
+
+@app.route('/gender')
+def gender():
+    return render_template('select-gender.html')
+
+@app.route('/mood')
+def mood():
+    return render_template('select-mood.html')
+
+@app.route('/season')
+def season():
+    return render_template('select-season.html')
+
+@app.route('/tpo')
+def tpo():
+    return render_template('select-tpo.html')
+
+@app.route('/result')
+def result():
+    return render_template('result.html')
+
 ## API 역할을 하는 부분
 @app.route('/tag', methods=['POST'])
 def write_tag():
