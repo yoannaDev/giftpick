@@ -2,7 +2,7 @@
 <html lang="ko">
     <head>
         <!-- Webpage Title -->
-        <title>giftpick | 관리자</title>
+        <title>선물 골라드림 | gift pick</title>
 
         <meta property="og:title" content="선물 골라드림 | giftpick"/>
         <meta property="og:description" content="선물을 골라드려요"/>
@@ -24,7 +24,10 @@
                 crossorigin="anonymous"></script>
 
         <!-- 구글폰트 -->
-        <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap" rel="stylesheet">
 
         <script type="text/javascript">
             $(document).ready(function () {
@@ -48,116 +51,17 @@
 
             //수정하기
             function makeCard(candidate) {
-                let num_candidates = 0; // 후보 몇명인지 세기
-                let tempHtml = `<div class="input-box">
-                <div class="gift-info">
-                    <p>${candidate["price"]}</p>
-                    <p>${candidate["title"]}</p>
-                    <p>${candidate["url"]}</p>
-                </div>
-                <div class="check-box">
-                    <div>
-                        <input type="checkbox" name="age" value="10"/>10대
-                        <input type="checkbox" name="age" value="20"/>20대
-                        <input type="checkbox" name="age" value="30"/>30대
-                        <input type="checkbox" name="age" value="40"/>40대
-                        <input type="checkbox" name="age" value="50"/>50대
-                        <input type="checkbox" name="age" value="60"/>60대
-                    </div>
-                    <div>
-                        <input type="checkbox" name="gender" value="female"/>여자
-                        <input type="checkbox" name="gender" value="male"/>남자
-                        <input type="checkbox" name="gender" value="no-gender"/>선택안함
-                    </div>
-                    <div>
-                        <input type="checkbox" name="budget" value="0"/>1만원 이하
-                        <input type="checkbox" name="budget" value="1"/>1만원~3만원
-                        <input type="checkbox" name="budget" value="3"/>3만원~5만원
-                        <input type="checkbox" name="budget" value="5"/>5만원~10만원
-                        <input type="checkbox" name="budget" value="10"/>10만원 이상
-                        <input type="checkbox" name="budget" value="100"/>100만원 이상
-                        <input type="checkbox" name="budget" value="etc-budget"/>기타
-                    </div>
-                    <div>
-                        <input type="checkbox" name="mood" value="moving"/>감동
-                        <input type="checkbox" name="mood" value="practice"/>실용
-                        <input type="checkbox" name="mood" value="memory"/>추억
-                        <input type="checkbox" name="mood" value="healing"/>힐링
-                        <input type="checkbox" name="mood" value="health"/>건강
-                        <input type="checkbox" name="mood" value="small-happy"/>소소한행복
-                        <input type="checkbox" name="mood" value="etc-mood"/>기타
-                    </div>
-                    <div>
-                        <input type="checkbox" name="tpo" value="fighting"/>시험 응원
-                        <input type="checkbox" name="tpo" value="anniversary"/>기념일
-                        <input type="checkbox" name="tpo" value="cheer-up"/>위로
-                        <input type="checkbox" name="tpo" value=""/>감사표시
-                        <input type="checkbox" name="tpo" value="birthday"/>생일
-                        <input type="checkbox" name="tpo" value="wedding"/>결혼
-                        <input type="checkbox" name="tpo" value="xmas"/>크리스마스
-                        <input type="checkbox" name="tpo" value="etc-tpo"/>기타
-                    </div>
-                    <div>
-                        <input type="checkbox" name="season" value="spring"/>봄
-                        <input type="checkbox" name="season" value="summer"/>여름
-                        <input type="checkbox" name="season" value="fall"/>가을
-                        <input type="checkbox" name="season" value="winter"/>겨울
-                        <input type="checkbox" name="season" value="no-season"/>선택안함
-                    </div>
-                    <button onclick="insert_to_db(${candidate})">제출</button>
-                    <button onclick="delete_data()">삭제</button>
-                    </div>
-                </div>`;
+                let tempHtml = ``;
                 $("#div-input").append(tempHtml);
             }
 
-            function insert_to_db(candidate) {
-                let tags = new Array();
-                let index = 0;
-                let url = candidate["url"];
-                let title = candidate["title"];
-                let price = candidate["price"];
-                for (let i = 0; i < document.getElementsByName("age").length; i++) {
-                    if (document.getElementsByName("age")[i].checked == true) {
-                        tags[index] = document.getElementsByName("age")[i].value;
-                        index++;
-                    }
-                }
-                for (let i = 0; i < document.getElementsByName("gender").length; i++) {
-                    if (document.getElementsByName("gender")[i].checked == true) {
-                        tags[index] = document.getElementsByName("gender")[i].value;
-                        index++;
-                    }
-                }
-                for (let i = 0; i < document.getElementsByName("budget").length; i++) {
-                    if (document.getElementsByName("budget")[i].checked == true) {
-                        tags[index] = document.getElementsByName("budget")[i].value;
-                        index++;
-                    }
-                }
-                for (let i = 0; i < document.getElementsByName("mood").length; i++) {
-                    if (document.getElementsByName("mood")[i].checked == true) {
-                        tags[index] = document.getElementsByName("mood")[i].value;
-                        index++;
-                    }
-                }
-                for (let i = 0; i < document.getElementsByName("tpo").length; i++) {
-                    if (document.getElementsByName("tpo")[i].checked == true) {
-                        tags[index] = document.getElementsByName("tpo")[i].value;
-                        index++;
-                    }
-                }
-                for (let i = 0; i < document.getElementsByName("season").length; i++) {
-                    if (document.getElementsByName("season")[i].checked == true) {
-                        tags[index] = document.getElementsByName("season")[i].value;
-                        index++;
-                    }
-                }
+            function insert_to_db(price, title, url) {
+
                 alert(tags);
                 $.ajax({
                     type: "POST",
                     url: "/tag",
-                    data: {tags_give: tags, url_give: url, title_give: title, price_give: price},
+                    data: {tags_give: tags, title_give: title},
                     success: function (response) {
                         if (response["result"] == "success") {
                             alert(tags);
@@ -166,27 +70,92 @@
                 })
             }
 
-            function delete_data() {
-
-            }
         </script>
 
         <style type="text/css">
+
             * {
-                font-family: "Do Hyeon", sans-serif;
+                font-family: 'Gothic A1', sans-serif;
+                color: white;
             }
 
-            .input-box {
-                border: 1px solid;
-                border-color: black;
-                margin: 3px;
+            body {
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .jumbotron {
+                background-image: url('핑크배경.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                width: 1280px;
+                height: 573px;
+                margin: 0px auto;
+                border-radius: 0px;
+                padding-top: 120px;
+                text-align: center;
+            }
+
+            .btn {
+                background-color: salmon;
+                border-color: salmon;
+                border-radius: 100px;
+                width: 210px;
+                height: 70px;
+                text-align: center;
+                padding-top: 20px;
+                margin: 5px;
+            }
+
+            <!--
+            -->
+            h2 {
+                color: black;
+                margin-left: 100px;
+                margin-top: 5px;
+                font-family: 'Nanum Gothic', sans-serif;
+            }
+
+            .tx {
+                margin-top: 30px;
+                font-weight: bolder;
+                font-size: 35px;
+                line-height: 50px;
+            }
+
+            .content1 {
+                font-weight: bold;
+                margin: 25px;
+                font-size: 18px;
+                line-height: 27px;
             }
         </style>
     </head>
 
     <body>
-        <h1>관리자 페이지</h1>
-        <div id="div-input"></div>
+        <div>
+        </div>
+        <div id="intro">
+            <h2>gift pick</h2>
+            <p></p>
+            <div class="jumbotron">
+                <h3 class="display-4 tx">
+                    선물을 고민하고 계신가요?<br>
+                    알맞은 선물을 추천해드려요.
+                </h3>
+                <p class="lead">
+                </p>
+                <p></p>
+                <h5 class="content1">
+                    클릭 몇번으로 선물을 추천받아요.<br>
+                    버튼을 누르시면 이동합니다.
+                </h5>
+                <p></p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">PICK!</a>
+                </p>
+            </div>
+        </div>
     </body>
 
 </html>

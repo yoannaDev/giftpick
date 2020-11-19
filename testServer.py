@@ -6,21 +6,19 @@ app = Flask(__name__)
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
 db = client.giftpick
 
-
 ## HTML을 주는 부분
 @app.route('/')
 def home():
     return render_template('testHtml.html')
-
 
 ## API 역할을 하는 부분
 @app.route('/tag', methods=['POST'])
 def write_tag():
     # 클라이언트가 준 tags 가져오기
     tags_receive = request.form.getlist('tags_give[]')
-    title_receive = request.form('title')
-    price_receive = request.form('price')
-    url_receive = request.form('url')
+    title_receive = request.form['title']
+    price_receive = request.form['price']
+    url_receive = request.form['url']
     db.testgift.insert_one({"title": title_receive, "price": price_receive, "url": url_receive, "tags": tags_receive})
 
     # 성공 여부 & 성공 메시지 반환
