@@ -25,7 +25,7 @@
 
 
     <title>hello</title>
-    <style>
+    <style type="text/css">
         * {
             font-family: 'Fjalla One', sans-serif;
         }
@@ -274,8 +274,8 @@
         }
 
     </style>
-    <script>
-        // login onclick
+    <script type="text/javascript">
+        /*login onclick*/
         let id = '';
         function login() {
             let phone = $("#login-phone").val();
@@ -295,13 +295,13 @@
             }
         }
 
-        // 회원가입 button onclick
+        /*회원가입 button onclick*/
         function goSignup(){
             $('#login-box').hide();
             $('#signup-box2').show();
         }
 
-        // sign-up onclick (중복가입 방지)
+        /*sign-up onclick (중복가입 방지)*/
         function searchUser() {
             let newPhone = $("#signup-phone").val();
             let newPw = $("#signup-pw").val();
@@ -311,7 +311,7 @@
                 url: "/",
                 data: {},
                 success: function (response) {
-                    //db에서 가져온 모든 고객의 phone 정보와 입력받은 폰번호 대조
+                    /*db에서 가져온 모든 고객의 phone 정보와 입력받은 폰번호 대조*/
                     let phones = response["phones"];
                     for (let i = 0; i < phones.length; i++) {
                         if (phones[i]["phone"] == newPhone) {
@@ -325,9 +325,8 @@
             })
         }
 
-        // 새로운 user 회원등록
+        /*새로운 user 회원등록*/
         function newUser(phone, pw) {
-            // 2. memo에 POST 방식으로 메모 생성 요청하기
             $.ajax({
                 type: "POST",
                 url: "/",
@@ -335,7 +334,7 @@
                 success: function (response) {
                     if (response["result"] == "success") {
                         alert("가입 성공");
-                        // 3. 성공 시 페이지 새로고침하기
+                        /*성공 시 페이지 새로고침하기*/
                         // window.location.reload();
                         $('#signup-box2').hide();
                         let tempHtml = `<div id="user-info">
@@ -344,7 +343,7 @@
                         <p>오른쪽에서 원하는 기능을 정하시고<br> '바로가기'를 눌러주세요.</p>
                         <div id="arrow"> > > >  </div>
                         </div>`;
-                        $("#login-box").append(tempHtml);   //로그인박스에 연장할지, 사인업박스에 연장할지
+                        $("#login-box").append(tempHtml);   /*로그인박스에 연장할지, 사인업박스에 연장할지*/
                     } else {
                         alert("서버 오류!(가입실패)")
                     }
@@ -352,12 +351,12 @@
             })
         }
 
-        // 튜터매칭 바로가기 onclick
+        /*튜터매칭 바로가기 onclick*/
         function goTutor() {
 
         }
 
-        // 자료판매 바로가기 onclick
+        /* 자료판매 바로가기 onclick*/
         function goNote() {
 
         }
