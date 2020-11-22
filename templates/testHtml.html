@@ -1,12 +1,274 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
+        <!-- Webpage Title -->
+        <title>선물 골라드림 | gift pick</title>
+
+        <meta property="og:title" content="선물 골라드림 | giftpick"/>
+        <meta property="og:description" content="선물을 골라드려요"/>
+        <meta property="og:image" content="{{ url_for('static', filename='gift.png') }}"/>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+
+        <!-- 구글폰트 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap" rel="stylesheet">
+
+        <script type="text/javascript">
+
+            function makeTagList(){
+                // age,gender,budget,tpo,season,mood
+
+            }
+        </script>
+
+        <style type="text/css">
+
+            * {
+                font-family: 'Gothic A1', sans-serif;
+                color: white;
+            }
+
+            body {
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .jumbotron {
+                background-image: url('https://images.unsplash.com/photo-1503455637927-730bce8583c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');
+                background-size: cover;
+                background-repeat: no-repeat;
+                width: 1280px;
+                height: 573px;
+                margin: 0px auto;
+                border-radius: 0px;
+                padding-top: 120px;
+                text-align: center;
+            }
+
+            .btn {
+                background-color: salmon;
+                border-color: salmon;
+                border-radius: 100px;
+                width: 210px;
+                height: 70px;
+                text-align: center;
+                padding-top: 20px;
+                margin: 5px;
+            }
+
+            h2 {
+                color: black;
+                margin-left: 100px;
+                margin-top: 5px;
+                font-family: 'Nanum Gothic', sans-serif;
+            }
+
+            .tx {
+                margin-top: 30px;
+                font-weight: bolder;
+                font-size: 35px;
+                line-height: 50px;
+            }
+
+            .content1 {
+                font-weight: bold;
+                margin: 25px;
+                font-size: 18px;
+                line-height: 27px;
+            }
+
+            /*css select*/
+
+            .select {
+                background-image: url('https://images.unsplash.com/photo-1503455637927-730bce8583c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');
+                background-size: cover;
+                background-repeat: no-repeat;
+                width: 1280px;
+                height: 573px;
+                margin: 0px auto;
+                border-radius: 0px;
+                padding-top: 80px;
+                text-align: center;
+            }
+
+
+            .button-area {
+                width: 500px;
+                margin: 0px auto;
+            }
+
+            .question {
+                margin-bottom: 60px;
+                margin-top: 100px;
+                font-weight: bolder;
+                font-size: 26px;
+            }
+            .select{
+                display:none;
+            }
+            #age-block{
+                display:block;
+            }
+
+
+
+        </style>
     </head>
+
     <body>
         <div>
-            hello
+        </div>
+        <div id="intro">
+            <h2>gift pick</h2>
+            <p></p>
+            <div class="jumbotron">
+                <h3 class="display-4 tx">
+                    선물을 고민하고 계신가요?<br>
+                    알맞은 선물을 추천해드려요.
+                </h3>
+                <p class="lead">
+                </p>
+                <p></p>
+                <h5 class="content1">
+                    클릭 몇번으로 선물을 추천받아요.<br>
+                    버튼을 누르시면 이동합니다.
+                </h5>
+                <p></p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="/age" role="button">PICK!</a>
+                </p>
+
+            </div>
+                <!-- age -->
+                <div class="select" id="age-block">
+                    <h3 class="display-4 question">
+                        받는 분의 나이가 어떻게 되나요?<br>
+                    </h3>
+                    <div class="button-area">
+                        <a class="btn btn-primary btn-lg btn-select" href="/gender" role="button"
+                           onclick="post_age('10')">10대</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/gender" role="button"
+                           onclick="post_age('20')">20대</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/gender" role="button"
+                           onclick="post_age('30')">30대</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/gender" role="button"
+                           onclick="post_age('40')">40대</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/gender" role="button"
+                           onclick="post_age('50')">50대</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/gender" role="button"
+                           onclick="post_age('60')">60대 이상</a>
+                    </div>
+                </div>
+                <!-- gender -->
+                <div class="select" id="gender-block">
+                    <h3 class="display-4 question">
+                        받는 분이 여자인가요? 남자인가요?<br>
+                    </h3>
+                    <div class="button-area">
+                        <a class="btn btn-primary btn-lg btn-select" href="/budget?value=" role="button"
+                           onclick="post_gender('female')">여자</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/budget?value=" role="button"
+                           onclick="post_gender('male')">남자</a>
+                    </div>
+                </div>
+                <!-- budget -->
+                <div class="select" id="budget-block">
+                    <h3 class="display-4 question">
+                        텅장 방지! <br>
+                        생각하고 있는 예산이 얼마인가요?<br>
+                    </h3>
+                    <div class="button-area">
+                        <a class="btn btn-primary btn-lg btn-select" href="/tpo" role="button"
+                           onclick="post_budget('0')">1만원 이하</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/tpo" role="button"
+                           onclick="post_budget('1')">1~3만원</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/tpo" role="button"
+                           onclick="post_budget('3')">3~5만원</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/tpo" role="button"
+                           onclick="post_budget('5')">5~10만원</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/tpo" role="button"
+                           onclick="post_budget('10')">10만원 이상</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/tpo" role="button"
+                           onclick="post_budget('50')">50만원 이상</a>
+                    </div>
+                </div>
+                <!-- tpo -->
+                <div class="select" id="tpo-block">
+                    <h3 class="display-4 question">
+                        중요한 날인가봐요 >.< <br>
+                        어떤 상황에서 주는 선물인가요?<br>
+                    </h3>
+                    <div class="button-area">
+                        <a class="btn btn-primary btn-lg btn-select" href="/season" role="button"
+                           onclick="post_tpo('birthday')">생일</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/season" role="button"
+                           onclick="post_tpo('christmas')">크리스마스</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/season" role="button"
+                           onclick="post_tpo('exam')">시험응원</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/season" role="button"
+                           onclick="post_tpo('couple')">커플(결혼)기념일</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/season" role="button"
+                           onclick="post_tpo('thank')">감사표시</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/season" role="button"
+                           onclick="post_tpo('tpoetc')">기타</a>
+                    </div>
+                </div>
+                <!-- season -->
+                <div class="select" id="season-block">
+                    <h3 class="display-4 question">
+                        지금이 무슨 계절인가요?<br>
+                        날씨에 따라 줄 수 있는 선물도 달라져요.<br>
+                    </h3>
+                    <div class="button-area">
+                        <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button"
+                           onclick="post_season('spring')">봄</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button"
+                           onclick="post_season('summer')">여름</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button"
+                           onclick="post_season('fall')">가을</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/mood" role="button"
+                           onclick="post_season('winter')">겨울</a>
+                    </div>
+                </div>
+                <!-- mood -->
+                <div class="select" id="mood-block">
+                    <h3 class="display-4 question">
+                        선물에서 주는 사람의 취향도 나타나기 마련이죠.<br>
+                        어떤 단어가 가장 마음에 드세요?
+                    </h3>
+                    <div class="button-area">
+                        <a class="btn btn-primary btn-lg btn-select" href="/result" role="button"
+                           onclick="post_mood('practice')">실용</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/result" role="button"
+                           onclick="post_mood('healing')">힐링</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/result" role="button"
+                           onclick="post_mood('memory')">추억</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/result" role="button"
+                           onclick="post_mood('healthy')">건강</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/result" role="button"
+                           onclick="post_mood('small-happy')">소소한행복</a>
+                        <a class="btn btn-primary btn-lg btn-select" href="/result" role="button"
+                           onclick="post_mood('moving')">감동</a>
+                    </div>
+                </div>
+
         </div>
     </body>
+
 </html>
