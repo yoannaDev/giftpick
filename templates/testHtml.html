@@ -1,122 +1,439 @@
-<!DOCTYPE html>
+<!Doctype html>
 <html lang="ko">
-    <head>
-        <!-- Webpage Title -->
-        <title>선물 골라드림 | gift pick</title>
 
-        <meta property="og:title" content="선물 골라드림 | giftpick"/>
-        <meta property="og:description" content="선물을 골라드려요"/>
-        <meta property="og:image" content="{{ url_for('static', filename='gift.png') }}"/>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-              crossorigin="anonymous">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
 
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 
-        <!-- 구글폰트 -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap" rel="stylesheet">
 
-        <script type="text/javascript">
+    <title>hello</title>
+    <style>
+        * {
+            font-family: 'Fjalla One', sans-serif;
+        }
 
-        </script>
+        html, body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+        }
 
-        <style type="text/css">
+        body {
+            color: whitesmoke;
+        }
 
-            * {
-                font-family: 'Gothic A1', sans-serif;
-                color: white;
+        #back {
+            font-family: 'Gothic A1', sans-serif;
+            background-size: cover;
+            /*filter: brightness(50%);*/
+            width: 100%; /*1280px*/
+            /*height: 573px;*/
+            /*height: 400px;*/
+            height: 35%;
+            background-repeat: no-repeat;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1532153955177-f59af40d6472?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60');
+            /*background-image:url('');*/
+        }
+
+        h2 {
+            margin-top: 0.5%;
+            margin-left: 5%;
+            margin-bottom: 0.5%;
+            color: black;
+            font-weight: bold;
+        }
+
+        #content-title {
+            margin-bottom: 0%;
+            padding-top: 5%;
+            padding-left: 3%;
+            font-weight: bold;
+            /*font-size: 50px;*/
+            font-size: xx-large;
+            /*letter-spacing: 0.7px;*/
+            color: white;
+        }
+
+        #explain {
+            margin-top: 0%;
+            padding-left: 3%;
+            font-size: large;
+            /*letter-spacing: revert; !*자간*!*/
+            color: white;
+        }
+
+        #explain-sub {
+            padding-left: 3%;
+            font-size: smaller;
+            /*font-size: 13px;*/
+            /*letter-spacing: normal; !*자간*!*/
+            color: white;
+        }
+
+        #content-info {
+            display: flex;
+            background-color: gainsboro;
+            margin-left: 4%;
+            height: 60%;
+            /*height: 400px;*/
+        }
+
+        #colored-area {
+            background-color: lavender;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 36%;
+            height: 100%;
+        }
+
+        #uncolored-area {
+            width: 65%;
+            height: 100%;
+            display: flex;
+            /*align-items: center;*/
+            /*flex-wrap: wrap;*/
+            flex-direction: row;
+        }
+
+        .box {
+            background-color: whitesmoke;
+            margin-left: 8%;
+            margin-top: 8%;
+            width: 30%;
+            height: 65%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: black;
+        }
+
+        .icon {
+            width: 30%;
+            height: 30%;
+            margin-top: 10%;
+        }
+
+        .inbox {
+            text-align: center;
+            width: 70%;
+            margin-bottom: 3%;
+        }
+
+        .box-title {
+            margin-top: 0%;
+            font-size: larger;
+            font-weight: bold;
+        }
+
+        .box-content {
+            margin-top: 3%;
+            font-size: small;
+        }
+
+        .btn-box {
+            border: none;
+            color: blueviolet;
+        }
+
+        .btn-box:hover {
+            color: darkviolet;
+            font-weight: bold;
+        }
+
+        #login-box {
+            /*display: none;*/
+            width: 70%;
+            height: 70%;
+            margin-top: 20%;
+        }
+
+        .login-title {
+            color: black;
+            font-size: x-large;
+        }
+
+        .phone {
+            margin-top: 8%;
+            padding: 1%;
+            width: 100%;
+            height: 10%;
+        }
+
+        .pw {
+            margin-top: 7%;
+            padding: 1%;
+            height: 10%;
+            width: 100%;
+        }
+
+        #login-button {
+            margin-top: 7%;
+            color: white;
+            border: none;
+            background-color: black;
+            height: 13%;
+            width: 100%;
+        }
+
+        #login-button:hover {
+            background-color: white;
+            color: black;
+            font-weight: bold;
+        }
+
+        #no-id {
+            margin-top: 7%;
+            color: black;
+            font-size: medium;
+            margin-right: 3%;
+        }
+
+        #btn-no-id {
+            border: none;
+            background: none;
+            color: blueviolet;
+            text-decoration: underline;
+        }
+
+        #btn-no-id:hover {
+            color: darkviolet;
+            font-weight: bold;
+        }
+
+        #signup-box {
+            width: 70%;
+            height: 70%;
+            margin-top: 10%;
+        }
+        #signup-box2{
+            display:none;
+        }
+
+        #sms {
+            margin-top: 2%;
+        }
+
+        #sms-box {
+            font-size: medium;
+            color: blueviolet;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        #singup-button {
+            font-size: larger;
+            margin-top: 7%;
+            color: white;
+            border: none;
+            background-color: blueviolet;
+            height: 13%;
+            width: 100%;
+        }
+
+        #singup-button:hover {
+            background-color: white;
+            color: black;
+            font-weight: bold;
+        }
+
+        #user-info {
+            color: black;
+            font-size: larger;
+            font-weight: bold;
+        }
+
+        #arrow {
+            width: 30%;
+            height: 20%;
+            margin-top: 10%;
+            background-color: blueviolet;
+            border: none;
+            color: white;
+            text-align: center;
+        }
+
+    </style>
+    <script>
+        // login onclick
+        let id = '';
+        function login() {
+            let phone = $("#login-phone").val();
+            let pw = $("#login-pw").val();
+            id=phone;
+            if (0)  //로그인이 실패시
+                alert('로그인 실패! 로그인 정보를 확인하세요.');
+            else {  //로그인 성공시
+                $('#login-box2').hide();
+                let tempHtml = `<div id="user-info">
+                        <div id="line"></div>
+                        <p id="info-phone">${phone}님 안녕하세요!</p>
+                        <p>오른쪽에서 원하는 기능을 정하시고<br> '바로가기'를 눌러주세요.</p>
+                        <div id="arrow"> > > >  </div>
+                        </div>`;
+                $("#login-box").append(tempHtml);
             }
+        }
 
-            body {
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
+        // 회원가입 button onclick
+        function goSignup(){
+            $('#login-box').hide();
+            $('#signup-box2').show();
+        }
 
-            .jumbotron {
-                background-image: url('https://images.unsplash.com/photo-1503455637927-730bce8583c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');
-                background-size: cover;
-                background-repeat: no-repeat;
-                width: 1280px;
-                height: 573px;
-                margin: 0px auto;
-                border-radius: 0px;
-                padding-top: 120px;
-                text-align: center;
-            }
+        // sign-up onclick (중복가입 방지)
+        function searchUser() {
+            let newPhone = $("#signup-phone").val();
+            let newPw = $("#signup-pw").val();
+            //
+            $.ajax({
+                type: "GET",
+                url: "/",
+                data: {},
+                success: function (response) {
+                    //db에서 가져온 모든 고객의 phone 정보와 입력받은 폰번호 대조
+                    let phones = response["phones"];
+                    for (let i = 0; i < phones.length; i++) {
+                        if (phones[i]["phone"] == newPhone) {
+                            alert('이미 가입한 고객입니다.');
+                            $("signup-phone").empty();
+                            return;
+                        }
+                    }
+                    newUser(newPhone, newPw);
+                }
+            })
+        }
 
-            .btn {
-                background-color: salmon;
-                border-color: salmon;
-                border-radius: 100px;
-                width: 210px;
-                height: 70px;
-                text-align: center;
-                padding-top: 20px;
-                margin: 5px;
-            }
+        // 새로운 user 회원등록
+        function newUser(phone, pw) {
+            // 2. memo에 POST 방식으로 메모 생성 요청하기
+            $.ajax({
+                type: "POST",
+                url: "/",
+                data: {phone_give: phone, pw_give: pw},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert("가입 성공");
+                        // 3. 성공 시 페이지 새로고침하기
+                        // window.location.reload();
+                        $('#signup-box2').hide();
+                        let tempHtml = `<div id="user-info">
+                        <div id="line"></div>
+                        <p id="info-phone">${phone}님 안녕하세요!</p>
+                        <p>오른쪽에서 원하는 기능을 정하시고<br> '바로가기'를 눌러주세요.</p>
+                        <div id="arrow"> > > >  </div>
+                        </div>`;
+                        $("#login-box").append(tempHtml);   //로그인박스에 연장할지, 사인업박스에 연장할지
+                    } else {
+                        alert("서버 오류!(가입실패)")
+                    }
+                }
+            })
+        }
 
-            <!--
-            -->
-            h2 {
-                color: black;
-                margin-left: 100px;
-                margin-top: 5px;
-                font-family: 'Nanum Gothic', sans-serif;
-            }
+        // 튜터매칭 바로가기 onclick
+        function goTutor() {
 
-            .tx {
-                margin-top: 30px;
-                font-weight: bolder;
-                font-size: 35px;
-                line-height: 50px;
-            }
+        }
 
-            .content1 {
-                font-weight: bold;
-                margin: 25px;
-                font-size: 18px;
-                line-height: 27px;
-            }
-        </style>
-    </head>
+        // 자료판매 바로가기 onclick
+        function goNote() {
 
-    <body>
-        <div>
-        </div>
-        <div id="intro">
-            <h2>gift pick</h2>
-            <p></p>
-            <div class="jumbotron">
-                <h3 class="display-4 tx">
-                    선물을 고민하고 계신가요?<br>
-                    알맞은 선물을 추천해드려요.
-                </h3>
-                <p class="lead">
-                </p>
-                <p></p>
-                <h5 class="content1">
-                    클릭 몇번으로 선물을 추천받아요.<br>
-                    버튼을 누르시면 이동합니다.
-                </h5>
-                <p></p>
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="/age" role="button">PICK!</a>
-                </p>
+        }
+    </script>
+</head>
+<body>
+<h2>hello</h2>
+<div id="back">
+    <p id="content-title">
+        STUDY TOGETHER
+    </p>
+    <p id="explain">
+        수업 정보가 없어서 고민이셨나요?<br>
+        hello에서 선배들과 함께 공부해요.
+    </p>
+    <div id="explain-sub">
+        hello는 공부자료 판매/구매와
+        튜터 매칭 서비스를 제공합니다.
+    </div>
+</div>
+
+<div id="content-info">
+    <div id="colored-area">
+        <!-- login -->
+        <div id="login-box">
+            <div id="login-box2">
+                <p class="login-title">LOGIN</p>
+                <input class="phone" id="login-phone" type="text" placeholder="phone number">
+                <input class="pw" id="login-pw" type="password" placeholder="password">
+                <button id="login-button" onclick="login()">Sign in</button>
+                <div id="no-id">
+                    아직 회원이 아니신가요?
+                    <button id="btn-no-id" onclick="goSignup()">회원가입</button>
+                </div>
             </div>
         </div>
-    </body>
+        <!-- sign up -->
+        <div id="signup-box">
+            <div id="signup-box2">
+                <p class="login-title">Sign up</p>
+                <input id="signup-phone" class="phone" type="text" placeholder="핸드폰 번호">
+                <div id="sms-box">인증번호 <input id="sms" type="text" placeholder=""></div>
+                <input id="signup-pw" class="pw" type="password" placeholder="비밀번호">
+                <input class="pw" type="password" placeholder="비밀번호 확인">
+                <button id="singup-button" onclick="searchUser()">Sign up</button>
+            </div>
+        </div>
 
+    </div>
+
+    <div id="uncolored-area">
+        <!-- information box -->
+        <div class="box">
+            <img class="icon" src="https://www.flaticon.com/svg/static/icons/svg/2083/2083261.svg">
+            <div class="inbox">
+                <p class="box-title">튜터 매칭
+                </p>
+                <p class="box-content">
+                    먼저 수업을 들었던 선배(튜터)와 현재 수업을 듣고 있는 후배(튜티)를 매칭해 드립니다.
+                </p>
+            </div>
+            <button onclick='goTutor()' id="go-tutor" class="btn-box" href="/tutor?phone=">바로가기</button>
+        </div>
+        <!-- information box -->
+        <div class="box">
+            <img class="icon" src="https://www.flaticon.com/svg/static/icons/svg/3701/3701855.svg">
+            <div class="inbox">
+                <p class="box-title">자료 판매</p>
+                <p class="box-content">
+                    직접 정리한 수업자료, 자격증 자료 등의 공부 자료를 판매/구매할 수 있습니다.
+                </p>
+            </div>
+            <button onclick='goNote()' id="go-note" class="btn-box" href="/note?phone=">바로가기</button>
+        </div>
+    </div>
+
+</div>
+</body>
 </html>
